@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
     public void IrALaIzquierda()
     {
-        Debug.Log("A la izquierda");
         if(transform.position.x > leftLimit)
         {
             transform.Translate(-stepDistance, 0, 0);
@@ -39,7 +38,6 @@ public class PlayerController : MonoBehaviour
     }
     public void IrALaDerecha()
     {
-        Debug.Log("A la Derecha");
         if (transform.position.x < rightLimit)
         {
             transform.Translate(stepDistance, 0, 0);
