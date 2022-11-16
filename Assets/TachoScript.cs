@@ -12,6 +12,9 @@ public class TachoScript : MonoBehaviour
     public float swipeMinDistance;
     private Vector2 startTouchPosition, endTouchPosition;
     private bool switchAllowed = false;
+    public GameObject imgBtnSwitchBlack;
+    public GameObject imgBtnSwitchGreen;
+
 
     void Start()
     {
@@ -52,11 +55,13 @@ public class TachoScript : MonoBehaviour
         isGreen = !isGreen;
         if (isGreen)
         {
-            spriteRenderer.sprite = tachoVerde;
+            spriteRenderer.sprite = tachoVerde;            
         }
         else
         {
             spriteRenderer.sprite = tachoNegro;
         }
+        imgBtnSwitchGreen.SetActive(!isGreen);
+        imgBtnSwitchBlack.SetActive(isGreen);
     }
 }
