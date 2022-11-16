@@ -13,6 +13,11 @@ public class Instanciador : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Invoke("DelayedStart",2);
+    }
+
+    void DelayedStart()
+    {
         StartCoroutine(TimeBetweenSpawns(timeBetweenSpawns));
     }
 

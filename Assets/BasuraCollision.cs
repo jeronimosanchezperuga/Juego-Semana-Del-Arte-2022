@@ -7,11 +7,13 @@ public class BasuraCollision : MonoBehaviour
     public bool isReciclable;
     public PlayerHealth playerHealth;
     public TachoScript tachoScript;
+    public SceneAdmin sceneAdmin;
 
     private void Start()
     {
         playerHealth = FindObjectOfType<PlayerHealth>();
         tachoScript = FindObjectOfType<TachoScript>();
+        sceneAdmin = FindObjectOfType<SceneAdmin>();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -27,7 +29,7 @@ public class BasuraCollision : MonoBehaviour
             //si el player es negro y la basura no reciclable
             // suma puntos
             if ((isReciclable && tachoScript.isGreen)
-                || (!isReciclable && !tachoScript.isGreen))
+                || (!isReciclable && !tachoScript.isGreen) || !sceneAdmin.separar)
             {
                 col.gameObject.GetComponent<PlayerScore>().AddScore();
             }
