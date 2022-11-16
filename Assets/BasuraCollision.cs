@@ -5,13 +5,19 @@ using UnityEngine;
 public class BasuraCollision : MonoBehaviour
 {
     public bool isReciclable;
+    public PlayerHealth playerHealth;
+
+    private void Start()
+    {
+        playerHealth = FindObjectOfType<PlayerHealth>();
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
         //si toca el piso, resta vida
         if (col.gameObject.CompareTag("Piso"))
         {
-            PlayerHealth.TakeDamage(10);
+            playerHealth.TakeDamage(10);
             //si toca al player
         }else if (col.gameObject.CompareTag("Player"))
         {
@@ -21,12 +27,12 @@ public class BasuraCollision : MonoBehaviour
             if ((isReciclable && col.gameObject.GetComponent<TachoScript>().isGreen)
                 || (!isReciclable && !col.gameObject.GetComponent<TachoScript>().isGreen))
             {
-                PlayerScore.AddScore();
+                col.gameObject.GetComponent<PlayerScore>().AddScore();
             }
             //de otra manera, resta vida
             else
             {
-                PlayerHealth.TakeDamage(10);
+                playerHealth.TakeDamage(10);
             }
         }
         //pase lo que pase, al colisionar se destruye

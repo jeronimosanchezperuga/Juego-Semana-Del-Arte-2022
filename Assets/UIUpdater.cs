@@ -8,9 +8,19 @@ public class UIUpdater : MonoBehaviour
     public TextMeshProUGUI textScore;
     public TextMeshProUGUI textHealth;
 
+    PlayerScore score;
+    PlayerHealth health;
+ 
+
+    private void Start()
+    {
+        score = FindObjectOfType<PlayerScore>();
+        health = FindObjectOfType<PlayerHealth>();
+    }
+
     void Update()
     {
-        textScore.text = PlayerScore.score.ToString();
-        textHealth.text = PlayerHealth.health.ToString();
+        textScore.text = score.score.ToString();
+        textHealth.text = health.health.ToString();
     }
 }

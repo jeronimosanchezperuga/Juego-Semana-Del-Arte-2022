@@ -19,15 +19,20 @@ public class TachoScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isGreen = !isGreen;
-            if (isGreen)
-            {
-                spriteRenderer.sprite = tachoVerde;
-            }
-            else
-            {
-                spriteRenderer.sprite = tachoNegro;
-            }
+            SwitchBinType();
+        }
+    }
+
+    public void SwitchBinType()
+    {
+        isGreen = !isGreen;
+        if (isGreen)
+        {
+            spriteRenderer.sprite = tachoVerde;
+        }
+        else
+        {
+            spriteRenderer.sprite = tachoNegro;
         }
     }
 }

@@ -19,11 +19,28 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > leftLimit)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) )
         {
-            transform.Translate(-stepDistance,0,0);
+            IrALaIzquierda();
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < rightLimit)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            IrALaDerecha();
+        }
+    }
+
+    public void IrALaIzquierda()
+    {
+        Debug.Log("A la izquierda");
+        if(transform.position.x > leftLimit)
+        {
+            transform.Translate(-stepDistance, 0, 0);
+        }
+    }
+    public void IrALaDerecha()
+    {
+        Debug.Log("A la Derecha");
+        if (transform.position.x < rightLimit)
         {
             transform.Translate(stepDistance, 0, 0);
         }

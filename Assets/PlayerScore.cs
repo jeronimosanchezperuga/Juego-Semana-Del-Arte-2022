@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerScore : MonoBehaviour
 {
-    public static int score;
+    public int score;
 
     void Start()
     {
         score = 0;
     }
 
-    public static void AddScore()
+    public void AddScore()
     {
         score++;
     }
