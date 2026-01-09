@@ -27,6 +27,8 @@ public class Instanciador : MonoBehaviour
 
     void BasuraInstantiate()
     {
+        if (GameManager.Instance.state != GameManager.GameState.Playing)
+            return;
         randomIndex = Random.Range(0, basuraPrefabs.Length);
         randomPointIndex = Random.Range(0, spawnPoints.Length);
         Instantiate(basuraPrefabs[randomIndex], spawnPoints[randomPointIndex].position, Quaternion.identity);
@@ -38,8 +40,6 @@ public class Instanciador : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(time);
             BasuraInstantiate();
-        }
-        
-    }
-    
+        }        
+    }    
 }

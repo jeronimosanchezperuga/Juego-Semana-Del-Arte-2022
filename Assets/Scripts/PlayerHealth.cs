@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         thisObject = gameObject;
+        health = 100;
     }
 
     public static void TakeDamage(int damage)
@@ -18,7 +19,14 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            Destroy(thisObject);
+            Death();
         }
+    }
+
+    static void Death()
+    {
+        // Handle player death (e.g., play animation, sound, etc.)
+        Destroy(thisObject);
+        GameManager.Instance.SetGameState(GameManager.GameState.GameOver);
     }
 }
