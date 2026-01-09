@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         }
 
         uiUpdater = FindObjectOfType<UIUpdater>();
-        state = GameState.Playing;
+        state = GameState.MainMenu;
     }
 
     // Start is called before the first frame update
@@ -45,31 +45,43 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.state == GameState.GameOver && Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Time.timeScale = 1;
-            this.state = GameState.Playing;
+            switch(this.state)
+                {
+                case GameState.MainMenu:
+                    SetGameState(GameState.Playing);
+                    StartGame();
+                    break;
+                case GameState.GameOver:
+                    RestartGame();
+                    break;
+            }                      
         }
     }
 
     // Method to manage game state
     public void SetGameState(GameState newState)
     {
-        state = newState;
         switch (newState)
         {
             case GameState.MainMenu:
                 // Handle main menu state
+                this.state = GameState.MainMenu;
+                MainMenu();
                 break;
             case GameState.Playing:
                 // Handle playing state
+                uiUpdater.ShowMainMenu(false);
+                uiUpdater.ShowGameOver(false);
+                this.state = GameState.Playing;
                 break;
             case GameState.Paused:
                 // Handle paused state
                 break;
             case GameState.GameOver:
                 // Handle game over state
+                this.state = GameState.GameOver;
                 GameOver();
                 break;
         }
@@ -78,6 +90,26 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         Time.timeScale = 0;
-        uiUpdater.ShowGameOver();
+        uiUpdater.ShowGameOver(true);
+    }
+
+    void MainMenu()
+    {
+        // Load main menu scene or activate main menu UI
+        uiUpdater.ShowGameOver(false);
+        uiUpdater.ShowMainMenu(true);
+    }
+
+    void RestartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SetGameState(GameState.MainMenu);
+    }
+
+    void StartGame()
+    {
+        Time.timeScale = 1;
+        SetGameState(GameState.Playing);
     }
 }

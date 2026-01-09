@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UIUpdater : MonoBehaviour
 {
     public TextMeshProUGUI textScore;
     public TextMeshProUGUI textHealth;
     public TextMeshProUGUI textGameOver;
+    public TextMeshProUGUI textInicio;
 
     void Start()
     {
         textGameOver.gameObject.SetActive(false);
+        textInicio.gameObject.SetActive(true);
         GameManager.Instance.uiUpdater = this;
     }
 
@@ -21,8 +24,13 @@ public class UIUpdater : MonoBehaviour
         textHealth.text = PlayerHealth.health.ToString();
     }
 
-    public void ShowGameOver()
+    public void ShowGameOver(bool value)
     {
-        textGameOver.gameObject.SetActive(true);
+        textGameOver.gameObject.SetActive(value);
+    }
+
+    public void ShowMainMenu(bool value)
+    {
+       textInicio.gameObject.SetActive(value);
     }
 }
